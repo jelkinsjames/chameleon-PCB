@@ -1164,6 +1164,7 @@
     )
   )
 
+
   (junction (at 55.88 33.02) (diameter 0) (color 0 0 0 0)
     (uuid 07ce5e91-ef67-4898-bf18-4dffd49917e6)
   )
@@ -2732,7 +2733,7 @@
   (symbol (lib_id "power:PWR_FLAG") (at 193.04 44.45 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid bfd7845b-8a4d-49de-8d6b-51ff01ac38e5)
-    (property "Reference" "#FLG0101" (id 0) (at 193.04 42.545 0)
+    (property "Reference" "#FLG?" (id 0) (at 193.04 42.545 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "PWR_FLAG" (id 1) (at 193.04 40.64 0))
@@ -2976,7 +2977,7 @@
 
   (symbol_instances
     (path "/bfd7845b-8a4d-49de-8d6b-51ff01ac38e5"
-      (reference "#FLG0101") (unit 1) (value "PWR_FLAG") (footprint "")
+      (reference "#FLG?") (unit 1) (value "PWR_FLAG") (footprint "")
     )
     (path "/1b7a679f-dc5d-4728-8bf0-2379f22cc816"
       (reference "#PWR01") (unit 1) (value "VBUS") (footprint "")

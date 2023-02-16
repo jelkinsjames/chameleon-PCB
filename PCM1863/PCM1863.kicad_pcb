@@ -2365,7 +2365,7 @@
   (gr_text "GPIO3" (at 175.2 144.6) (layer "F.SilkS") (tstamp 512ca22e-7f35-442b-b5ec-515b2b3e66ad)
     (effects (font (size 1 1) (thickness 0.15)))
   )
-  (gr_text "+3.3VD" (at 133.2 139.9) (layer "F.SilkS") (tstamp 54a95e0e-6050-405a-9855-3d9d46017b2a)
+  (gr_text "+3.3VD" (at 133.9 139.9) (layer "F.SilkS") (tstamp 54a95e0e-6050-405a-9855-3d9d46017b2a)
     (effects (font (size 1 1) (thickness 0.15)))
   )
   (gr_text "MDO" (at 176.2 126.6) (layer "F.SilkS") (tstamp 677b8fc6-7184-45aa-9f3d-7db5ca906bd7)

@@ -5416,24 +5416,6 @@
     (pin "1" (uuid 58975022-d24e-487f-9c49-e4487c69b129))
   )
 
-  (symbol (lib_id "power:GND") (at 157.48 146.05 90) (unit 1)
-    (in_bom yes) (on_board yes)
-    (uuid 96ae2e58-59ff-4772-87a2-8a0e4efc4221)
-    (property "Reference" "#PWR0126" (id 0) (at 163.83 146.05 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "GND" (id 1) (at 160.02 146.05 90)
-      (effects (font (size 1.27 1.27)) (justify right))
-    )
-    (property "Footprint" "" (id 2) (at 157.48 146.05 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (id 3) (at 157.48 146.05 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid ca3ceb24-2e11-426e-b8ad-61aa208ba210))
-  )
-
   (symbol (lib_id "power:GNDD") (at 35.56 86.36 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 96fd87dd-670c-40c8-aff5-13abd07e9583)
@@ -6299,6 +6281,24 @@
     (pin "1" (uuid c82111df-7d55-4d25-908b-868802120d21))
   )
 
+  (symbol (lib_id "power:GNDA") (at 157.48 146.05 90) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid e4a5f715-9288-4509-8816-3f5752571dcd)
+    (property "Reference" "#PWR?" (id 0) (at 163.83 146.05 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GNDA" (id 1) (at 160.02 144.78 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "" (id 2) (at 157.48 146.05 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (id 3) (at 157.48 146.05 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 79eabdb8-7122-4504-a36a-b0910b16083c))
+  )
+
   (symbol (lib_id "Device:R") (at 152.4 223.52 90) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid e53fda51-b428-4100-b033-cea1e9a12f00)
@@ -6722,9 +6722,6 @@
     (path "/0380d536-a1fc-4ab9-bfe4-d28745a82810"
       (reference "#PWR0125") (unit 1) (value "GNDA") (footprint "")
     )
-    (path "/96ae2e58-59ff-4772-87a2-8a0e4efc4221"
-      (reference "#PWR0126") (unit 1) (value "GND") (footprint "")
-    )
     (path "/8206264a-b333-4f9c-be7b-7fda8663f2d7"
       (reference "#PWR0127") (unit 1) (value "GNDA") (footprint "")
     )
@@ -6823,6 +6820,9 @@
     )
     (path "/8414de7f-6c82-4eb5-9068-edbc336d4f98"
       (reference "#PWR0159") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/e4a5f715-9288-4509-8816-3f5752571dcd"
+      (reference "#PWR?") (unit 1) (value "GNDA") (footprint "")
     )
     (path "/0c2dffd9-4bf4-46de-b591-2fa76c6eabf3"
       (reference "C1") (unit 1) (value ".01uF") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")

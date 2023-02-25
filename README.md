@@ -2,7 +2,7 @@
 This repo documents the University of Washington ENGINE 2023 Chameleon Team's journey towards creating a digital, modular synthesizer - a **Chameleon**. The team consists of Todd Bloom, Max Chastain, Nathan Ford, Julian James, and Trina Kha. The mentor for the project is Eric Klavins.
 
 Each individual component of the project has its own README.md file. The instructional files are:
-- [PCM1863 ADC](/PCM1863/README.md)
+- [PCM1863 ADC](https://github.com/jelkinsjames/chameleon-PCB/tree/main/PCM1863)
 
 Eric Klavins hosts GitHub repos with the software used for the project. The software is Yet Another Synthesizer Engine (YASE). Links to relevant repos are provided below:
 - [yase](https://github.com/klavins/yase.git): The synthesizer engine used in the project.
@@ -23,7 +23,7 @@ The **inputs** are: *Two stereo S/PDIF inputs* to take incoming data from other 
 
 The **outputs** are: *Four stereo S/PDIF outputs* (carrying the same signal) that can be connected to other Chameleons and *two line-level mono-analog audio outputs.*
 
-
+---
 
 ## Block Diagram:
 
@@ -57,6 +57,8 @@ The Chameleon Module sits on top of the ARTY board, which has female pin headers
 - PCB silkscreen is used for graphics
 - The front panel fits in standard [Euroracks](https://en.wikipedia.org/wiki/Eurorack)
 - Laser cut "skins" can be swapped out to match current Chameleon functionality
+
+---
 
 ## User Interface (U/I):
 - The UI is managed by an [atmega328p](https://www.microchip.com/en-us/product/ATmega328P) chip (the same chip as an Arduino UNO)

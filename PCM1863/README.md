@@ -21,6 +21,7 @@ The chip has two primary ADCs that can be used for stereo audio (for a total of 
 The chip can support up to two microphones (analog or digital). Analog inputs are directed through Vin while digital microphones are directed through GPIO.
 
 The chip supports two digital microphones using GPIO1 as data input and GPIO2 as a clock. The recommended clock frequency is 2.8224MHz (44.1kHz * 64). The recommended sampling frequency is 44.1kHz where SCK is 256 * the sampling frequency. We are leaving the auto clock detector enabled for digital microphones.
+
 ![](digitalmic.png)
 
 Input gains are selectable as a range from [-12dB, 32dB] in intervals of 0.5dB. Digital mixing can offer up to 18dB. Coarse gain is done with analog amplification while fine gain is done with digital amplification. *Microphones primarily use 20dB gain amplification, so we will use 20dB gain.* *Changing gain requires the on-chip DSP to be clocked.* Clocking without a master does not work without an external oscillator. Gain clipping is auto-detected and corrected, or an interrupt can be enabled and sent to a GPIO output. Attenuation can be programmed to -3dB, -4dB, -5dB, or -6dB.
@@ -70,6 +71,10 @@ Stereo inputs should be linked and tracked across input channels.
 - *MST_MODE (0x20):* Set master or follower mode. Bits [1:3] sets clock sources for ADC, DSP1, and DSP2. *We ignore these, and use the default settings.*
 - *MST_SCK_SRC (0x20):* Sets the source of the SCKO in master mode. *We are using the chip in follower mode, so we are ignoring this register.*
 - *CLKDET_EN (0x20):* **Set the auto clock detector bit to true. This step is important!**
+- PLL configuration: registers 0x28 --> 0x2D
+![](pllregisters.png)
+- *CLK_ERR_STAT (0x75):* Status of halt and error detector. Error detector is high if there is an unexpected ratio of BCK to LRCK. If an error is detected, the chip is put into standby mode.
+
 
 ---
 # PCB Creation:
@@ -240,10 +245,39 @@ The PCM1863 has two I2C modes: *fast and standard*. If one number is given, the 
 
 ---
 
-**Timing information for master vs. follower modes:**
+**Timing information for follower mode:**
 
 *We will be using follower mode.*
 ![](timingfollowermode.png)
+
+# TODO: can we do 44.1kHz sampling?
+![](plltimings.png)
+
+---
+
+### PLL Information:
+The PLL is enabled by default to clock the fast DSPs.
+- **PLLCK = (PLLCKIN * R * JD) / P**
+- **PLLCK = (PLLCKIN * R * K) / P**
+
+Where:
+- R, J, D, and P are register programmable values
+- **J:** is the integer part of K
+- **D:** is the fractional part of K to *four digits of precision*
+
+![](pllexamples.png)
+
+### Clock error procedure:
+When a clock error is detected, the chip goes into standby mode. The steps are as follows:
+- Mute audio output immediately (no ramp down)
+- Wait until proper clock ratio returns (*Clock Waiting State*)
+- Restart clock detection, PLL, and clock dividers
+- Start output fade in
+
+![](clkerrorlogic.png)
+![](clkerrorlogic2.png)
+
+Clock error detection can be ignored by disabling *CLKDET_EN*.
 
 ### PCM1863 Suggested landing pattern:
 The Ti suggested landing pattern for the chip and its TSSOP30 package:

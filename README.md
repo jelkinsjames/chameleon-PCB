@@ -3,6 +3,7 @@ This repo documents the University of Washington ENGINE 2023 Chameleon Team's jo
 
 Each individual component of the project has its own README.md file. The instructional files are:
 - [PCM1863 ADC](https://github.com/jelkinsjames/chameleon-PCB/tree/main/PCM1863)
+- [PCM5242 DAC](https://github.com/jelkinsjames/chameleon-PCB/blob/main/PCM5242/README.md)
 
 Eric Klavins hosts GitHub repos with the software used for the project. The software is Yet Another Synthesizer Engine (YASE). Links to relevant repos are provided below:
 - [yase](https://github.com/klavins/yase.git): The synthesizer engine used in the project.

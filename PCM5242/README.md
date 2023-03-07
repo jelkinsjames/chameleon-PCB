@@ -1,6 +1,6 @@
 # PCM 5242
 
-The [PCM5242] (https://www.ti.com/product/PCM5242) is a 32-bit stereo DAC IC chip. Its datasheet can be found and downloaded [here](chameleon-PCB/PCM5242/pcm5242.pdf).
+The [PCM5242](https://www.ti.com/product/PCM5242) is a 32-bit stereo DAC IC chip. Its datasheet can be found and downloaded [here](chameleon-PCB/PCM5242/pcm5242.pdf).
 
 Here is a block diagram of the 5242 (taken from the datasheet):
 ![Block_Diagram](5242_blockdiagram.png)

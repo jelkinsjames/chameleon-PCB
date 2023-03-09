@@ -111,7 +111,7 @@ We will be using the ADC is follower mode. The PLL will automatically detect for
 
 ---
 # Registers:
-The registers are split into two usable pages. Page 0 deals with device configuration and page 1 indirectly program coefficients for two fixed DSPs. Page 0 is the focus of this project. Change pages by writing to register 0x00 with the desired page number. Reset registers by writing 0xFE to register 0x00. 
+The registers are split into two usable pages. Page 0 deals with device configuration and page 1 indirectly program coefficients for two fixed DSPs. Page 0 is the focus of this project. Change pages by writing to register 0x00 with the desired page number. Reset registers by writing 0xFE to register 0x00.
 
 ### Input Selection:
 Inputs can be mixed using the ADC input selection register *ADCX1_INPUT_SEL_X (0x06 --> 0x09).* Mixing left and right sources to create mono mixes can only be done in the digital mixer, post ADC conversion, or alternatively, other analog inputs can be connected for mixing. Here is a table describing possible mixes. [SE] represents single-ended where [DIFF] represents a differential input.
@@ -134,7 +134,7 @@ Stereo inputs should be linked and tracked across input channels.
 ![](pllregisters.png)
 - *CLK_ERR_STAT (0x75):* Status of halt and error detector. Error detector is high if there is an unexpected ratio of BCK to LRCK. If an error is detected, the chip is put into standby mode.
 - *AUXADC_DATA_CTRL (0x58):* Checks the DC detector as part of the *energysense* and *controlsense*.
-- *SEC_ADC_INPUT_SEL (0x0A):* Scanning for thresholds and interrupts in active mode (autodetects in sleep mode). The chip does not autoswitch from sleep to wake mode.
+- *SEC_ADC_INPUT_SEL (0x0A):* Scanning for thresholds and interrupts in active mode (autodetects in sleep mode). The chip does not auto switch from sleep to wake mode.
 
 ### Sense:
 We are not using the chip in sleep mode. We will always have the chip in active mode.

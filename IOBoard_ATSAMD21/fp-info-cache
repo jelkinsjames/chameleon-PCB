@@ -1,4 +1,4 @@
-21703304010831283
+21704982326416956
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -87611,6 +87611,13 @@ Integrated Circuit
 0
 33
 33
+custom_lib
+PEC12R-3217F-S0024-ND
+
+
+0
+7
+6
 custom_lib
 SJ435107RS
 SJ-435107RS-3

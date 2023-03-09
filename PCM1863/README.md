@@ -5,6 +5,8 @@ The chip is a TSSOP (DBT) 30 pin package. The chip is hardware and software cont
 
 Drivers for the PCM 186x series are available [here](https://e2e.ti.com/support/audio-group/audio/f/audio-forum/773056/faq-linux-drivers-device-drivers-for-aic31xx-dac31xx-aic325x-aic320x-aic326x-aic321x). More driver information can be found on the [TI webpage](https://www.ti.com/product/PCM1863?utm_source=google&utm_medium=cpc&utm_campaign=asc-null-null-GPN_EN-cpc-pf-google-wwe&utm_content=PCM1863&ds_k=PCM1863&DCM=yes&gclid=Cj0KCQiA6fafBhC1ARIsAIJjL8l6Lk9SO-Q0-fB0_5uYiveTayMeogbHzMJUxCBsQcNd4n_-5XY2ie4aAl2cEALw_wcB&gclsrc=aw.ds) for the PCM1863.
 
+The [Ti PCM186X Evaluation Board](https://www.ti.com/lit/ug/slau615/slau615.pdf?ts=1678288360067&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FPCM1864) has additional resources on how to design an example board. [PurePath Console 3 (PPC3)](https://www.ti.com/tool/PUREPATHCONSOLE) is a GUI for development of audio chips such as the PCM1863
+
 Here is a block diagram of the chip we are using:
 
 ![](blockdiagram.png)
@@ -24,11 +26,17 @@ The chip supports two digital microphones using GPIO1 as data input and GPIO2 as
 
 ![](digitalmic.png)
 
+The suggested hardware for single-ended inputs is:
+
+![](single-ended.png)
+
 Input gains are selectable as a range from [-12dB, 32dB] in intervals of 0.5dB. Digital mixing can offer up to 18dB. Coarse gain is done with analog amplification while fine gain is done with digital amplification. *Microphones primarily use 20dB gain amplification, so we will use 20dB gain.* *Changing gain requires the on-chip DSP to be clocked.* Clocking without a master does not work without an external oscillator. Gain clipping is auto-detected and corrected, or an interrupt can be enabled and sent to a GPIO output. Attenuation can be programmed to -3dB, -4dB, -5dB, or -6dB.
 
 Microphone bias can power electret microphones. Input 2.6V to pin 5 (MIC BIAS). Decouple and filter the power. An on-chip terminating resistor (to GND) can be enabled by writing to the *MIC_BIAS_CTRL (0x15)* register. The default is to bypass the onboard terminating resistor.
 
 DC blocking capacitors are used for all analog input signals. The pins are biased to AVDD / 2. *Do not connect unused analog input pins.*
+
+For single-ended analog inputs, use MD2, MD5, MD6. For setting the device to follower mode, use MD0 and MD1.
 
 Types of inputs:
 - Control voltage (CV) at 5V stepped down.
@@ -36,8 +44,56 @@ Types of inputs:
 - Guitar or bass (through adapter into a 3.5mm jack)
 
 ## Outputs:
+The interrupts on the chip have been disabled.
+
 - Digital I2C signal
 - Other configurable outputs are not used for our project.
+- GPIO pins have their polarities reversed
+
+## Hardware control configurations:
+- **To set to I2C mode:** Set MD0 low.
+- **To set hardware address:** Set MDO1 low for I2C address: 0x94. Set MDO1 High for I2C address: 0x96.
+
+The power-up sequence consists of the following steps:
+1. Power-on reset
+(a) Power up AVDD, DVDD and IOVDD
+(b) Check if LDO is being driven with an external 1.8 V, or is an output. Enable LDO if required.
+(c) Release digital reset
+2. Wait until analog voltage reference is stable
+3. Configure clock (PLL requires < 250 µs)
+4. Fade-in audio ADC content
+
+## Basic device configuration:
+- The device by default starts in follower mode at 48 kHz
+- Set global loss level to be –50 dB using the DSP coefficient method.
+- Set 4R as controlsense input (for example, a control voltage for volume control) using SIGDET_CH_MODE (0x30)
+- Configure active mode secondary to be channel 4R using SEC_ADC_INPUT_SEL (0x0A)
+- Set Read Data without latch in register AUXADC_DATA_CTRL (0x58)
+- Set interrupts (energysense and controlsense) using INT_EN (0x60)
+- Set interrupt pulse for 3 ms (makes it easier to see it visually using INT_PLS (0x62)
+
+## Update system settings:
+- Read interrupt status INT_STAT register(0x61)
+- Clear interrupt enable INT_EN (0x60)
+- Check which input caused the interrupt; in this case, looking for (4R) SIGDET_STAT (0x32)
+- Read new 4R data (for example, SIGDET_DC_LEVEL_CH4_R 0x57).
+- Set SIGDET_DC_REF_CH4_R (0x55) to be the new value.
+- Now that interrupt source is removed, we can clear the SIGDET_STAT register (0x32)
+- Write 0xFF to SIGDET_STAT register (0x32).
+- Write 0x00 to SIGDET_STAT register (0x32).
+- Re-enable control Sense Interrupt in INT_EN (0x60)
+
+
+## I2C communication:
+- **SDA:** Pin 23, I/O I2C data.
+- **SCL:** Pin 24, input I2C clock.
+- **AD:** Pin 25, input I2C address 1.
+
+- *MST_MODE (0x20):* Set high to select follower I2C mode.
+
+7-bit follower address. The first 6 (MSB) bits of the address are factory set to **1001 01**. The final bit is set by the address pin (AD).
+
+I2C status: The status of I2C can be read from register 0x72 through 0x75 and 0x78. Sample rate ,power rail status, clock error, and clock ratios can be read from the status registers.
 
 ## Clocking:
 **In follower mode, all clocks must be supplied externally.** The chip's master clock (MCK) must be of the form 2^n power of the sampling frequency. The chip's bit clock (BCK) should be running at 64 * sampling frequency. The word clock (left-right clock, LLRCK) determines the sampling point for the ADC. The chip must have its phase lock loop (PLL) programmed to generate audio clocks, but any incoming clock in the range [1MHz, 50MHz] will work.
@@ -52,14 +108,17 @@ We will be using the ADC is follower mode. The PLL will automatically detect for
 
 # TODO: what is our master clock speed? What is our bit clock speed? What is our LLRCK speed? What are DSP1 and DSP2?
 
+
 ---
 # Registers:
+The registers are split into two usable pages. Page 0 deals with device configuration and page 1 indirectly program coefficients for two fixed DSPs. Page 0 is the focus of this project. Change pages by writing to register 0x00 with the desired page number. Reset registers by writing 0xFE to register 0x00. 
 
 ### Input Selection:
 Inputs can be mixed using the ADC input selection register *ADCX1_INPUT_SEL_X (0x06 --> 0x09).* Mixing left and right sources to create mono mixes can only be done in the digital mixer, post ADC conversion, or alternatively, other analog inputs can be connected for mixing. Here is a table describing possible mixes. [SE] represents single-ended where [DIFF] represents a differential input.
 
 **ADCX1_INPUT_SEL_X:**
 ![ADCX1_INPUT_SEL_X](muxmix.png)
+
 
 ### Channel Linking:
 Stereo inputs should be linked and tracked across input channels.
@@ -74,11 +133,24 @@ Stereo inputs should be linked and tracked across input channels.
 - PLL configuration: registers 0x28 --> 0x2D
 ![](pllregisters.png)
 - *CLK_ERR_STAT (0x75):* Status of halt and error detector. Error detector is high if there is an unexpected ratio of BCK to LRCK. If an error is detected, the chip is put into standby mode.
+- *AUXADC_DATA_CTRL (0x58):* Checks the DC detector as part of the *energysense* and *controlsense*.
+- *SEC_ADC_INPUT_SEL (0x0A):* Scanning for thresholds and interrupts in active mode (autodetects in sleep mode). The chip does not autoswitch from sleep to wake mode.
+
+### Sense:
+We are not using the chip in sleep mode. We will always have the chip in active mode.
+- *DSP_CTRL (0x71):* Allows you to choose between FIR response and low-latency IIR response. The high pass filter to remove DC bias is enabled by default.
+
+### Audio Format Selection:
+Pin MD4 to select between left justified and I2S.
+- *I2S_FMT (0x0B):* Choose between, left justified, right justified, time division multiplexed, and I2S. We are selecting I2S.
+- *GPIO1_FUNC (0x10):* Enables second **DOUT**.
 
 
 ---
 # PCB Creation:
 Our ADC board centers around the PCM1863, but contains other peripherals. This section will discuss the design decisions for the PCM1863 and peripherals.
+
+Ti recommended practices are:
 
 Here is the current KiCad 3D model for our PCB: ![ADC v.4](pcm1863v4.png)
 
@@ -99,8 +171,6 @@ Below are several example circuits given in the Ti datasheet:
 
 ![](testcircuit.png)
 
-![](mastermodeex.png)
-
 ![](followermodeex.png)
 
 ---
@@ -108,7 +178,7 @@ Below are several example circuits given in the Ti datasheet:
 This section will detail decisions made regarding the components connected to the PCM1863.
 
 **Vin:**
-The PCM1863 is able to handle 4-channels of analog inputs. There is a right and a left for each input. We are using mono not stereo audio.
+The PCM1863 is able to handle 4-channels of analog inputs. There is a right and a left for each input. We are using mono not stereo audio. We are using differential pairs instead of stereo.
 
 ### PCM1863 Pinout:
 **1  - VINL2/VIN1M:** Analog input 2, L-channel (or differential M input for input 1)
@@ -124,6 +194,7 @@ The PCM1863 is able to handle 4-channels of analog inputs. There is a right and 
 
 **6  - VREF:** Reference voltage output decoupling point (typically, 0.5 AVDD)
 - Connect 1-µF capacitor from this pin to AGND.
+# TODO: what voltage do I want for VREF?
 
 **7  - AGND:** Analog ground
 
@@ -278,6 +349,12 @@ When a clock error is detected, the chip goes into standby mode. The steps are a
 ![](clkerrorlogic2.png)
 
 Clock error detection can be ignored by disabling *CLKDET_EN*.
+
+### Secondary ADC:
+We are always using the chip in active mode, so the secondary ADC is not used in wake functions.
+
+### DSPs:
+DSP1 and DSP2 are fixed function processors. DSPs can be programmed by targetting their memory address.
 
 ### PCM1863 Suggested landing pattern:
 The Ti suggested landing pattern for the chip and its TSSOP30 package:

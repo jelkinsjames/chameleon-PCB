@@ -21,6 +21,7 @@ In our project, we are using the PCM1863 as an analog-to-digital (ADC) converter
 - 2-2uF: X7R, Ceramic
 - 20pF: X7R, 50V Ceramic
 - 0.01uF: X7R, Ceramic film
+# TODO: finish bill of materials
 
 ### Inputs (mono only):
 Inputs can have a voltage from [0, 2.1Vrms] in single mode and [0, 4.2Vrms] in differential mode. We are using our device in differential mode.
@@ -149,11 +150,15 @@ Pin MD4 to select between left justified and I2S.
 # PCB Creation:
 Our ADC board centers around the PCM1863, but contains other peripherals. This section will discuss the design decisions for the PCM1863 and peripherals.
 
-Ti recommended practices are:
+Ti recommended PCB practices are:
+- Separate analog and digital sections where layout permits. Route analog lines away from digital lines. This routing technique prevents digital noise from coupling back into analog signals.
+- The bottom copper plane can be a shared ground, whereas a ground plane can be used on the top layer as well. Separated planes for analog and digital grounds are not required to achieve data sheet performance.
+- Place decoupling capacitors as close as possible to the supply pins, and in the same layer of the device, to yield the best results. Do not place vias between decoupling capacitors and the device.
+- Place ground planes between the input traces to achieve the lowest crosstalk performance.
 
-Here is the current KiCad 3D model for our PCB: ![ADC v.4](pcm1863v4.png)
+Here is the current KiCad 3D model for our PCB: ![ADC v.4](pcm1863v5.png)
 
-Here is the current KiCad schematic for our PCB: ![ADC v.4](pcm1863v4schematic.png)
+Here is the current KiCad schematic for our PCB: ![ADC v.4](pcm1863v5schematic.png)
 
 ## The PCM1863 chip:
 The PCM1863 has 30 pins. ![](pcmpinout.png)

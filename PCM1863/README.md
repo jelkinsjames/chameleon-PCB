@@ -9,7 +9,7 @@ The [Ti PCM186X Evaluation Board](https://www.ti.com/lit/ug/slau615/slau615.pdf?
 
 Here is a block diagram of the chip we are using:
 
-![](/chameleon-pcb/assets/blockdiagram.png)
+![](/chameleon-pcb/assets/images/blockdiagram.png)
 
 ---
 

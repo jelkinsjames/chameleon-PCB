@@ -9,7 +9,7 @@ The [Ti PCM186X Evaluation Board](https://www.ti.com/lit/ug/slau615/slau615.pdf?
 
 Here is a block diagram of the chip we are using:
 
-![](/images/blockdiagram.png)
+![](/chameleon-pcb/assets/blockdiagram.png)
 
 ---
 
@@ -30,15 +30,13 @@ The chip has two primary ADCs that can be used for stereo audio (for a total of 
 
 The chip can support up to two microphones (analog or digital). Analog inputs are directed through Vin while digital microphones are directed through GPIO. We are not using microphones.
 
-<<<<<<< HEAD
 The chip supports two digital microphones using GPIO1 as data input and GPIO2 as a clock. The recommended clock frequency is 2.8224MHz (44.1kHz * 64). The recommended sampling frequency is 44.1kHz where SCK is 256 * the sampling frequency. We are leaving the auto clock detector enabled for digital microphones.
 
 ![](/images/digitalmic.png)
 
 The suggested hardware for single-ended inputs is:
-=======
+
 Place film-type capacitors of 0.01 µF as close as possible to the VINLx and VINRx pins, and terminate to GND as close as possible to the AGND pin in order to maximize the dynamic performance of ADC. To maintain common-mode rejection, match the series resistors as closely as possible. The suggested hardware for single-ended inputs instead of microphones is:
->>>>>>> 1a03b37f42354869c9ae66fb4a058da42aa7bd5b
 
 ![](/images/single-ended.png)
 

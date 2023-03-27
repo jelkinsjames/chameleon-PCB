@@ -9,7 +9,7 @@ The [Ti PCM186X Evaluation Board](https://www.ti.com/lit/ug/slau615/slau615.pdf?
 
 Here is a block diagram of the chip we are using:
 
-![](blockdiagram.png)
+![](/images/blockdiagram.png)
 
 ---
 
@@ -24,11 +24,11 @@ The chip can support up to two microphones (analog or digital). Analog inputs ar
 
 The chip supports two digital microphones using GPIO1 as data input and GPIO2 as a clock. The recommended clock frequency is 2.8224MHz (44.1kHz * 64). The recommended sampling frequency is 44.1kHz where SCK is 256 * the sampling frequency. We are leaving the auto clock detector enabled for digital microphones.
 
-![](digitalmic.png)
+![](/images/digitalmic.png)
 
 The suggested hardware for single-ended inputs is:
 
-![](single-ended.png)
+![](/images/single-ended.png)
 
 Input gains are selectable as a range from [-12dB, 32dB] in intervals of 0.5dB. Digital mixing can offer up to 18dB. Coarse gain is done with analog amplification while fine gain is done with digital amplification. *Microphones primarily use 20dB gain amplification, so we will use 20dB gain.* *Changing gain requires the on-chip DSP to be clocked.* Clocking without a master does not work without an external oscillator. Gain clipping is auto-detected and corrected, or an interrupt can be enabled and sent to a GPIO output. Attenuation can be programmed to -3dB, -4dB, -5dB, or -6dB.
 
@@ -101,10 +101,10 @@ I2C status: The status of I2C can be read from register 0x72 through 0x75 and 0x
 - 192kHz sampling is only supported if using a CMOS oscillator (we are not using)
 - DSP1 and DSP2 should be 256 * sampling frequency
 
-![](clocking.png)
+![](/images/clocking.png)
 
 We will be using the ADC is follower mode. The PLL will automatically detect for standard audio sampling rates. The clocking modes are shown below:
-![](clockingmodes.png)
+![](/images/clockingmodes.png)
 
 # TODO: what is our master clock speed? What is our bit clock speed? What is our LLRCK speed? What are DSP1 and DSP2?
 
@@ -117,12 +117,12 @@ The registers are split into two usable pages. Page 0 deals with device configur
 Inputs can be mixed using the ADC input selection register *ADCX1_INPUT_SEL_X (0x06 --> 0x09).* Mixing left and right sources to create mono mixes can only be done in the digital mixer, post ADC conversion, or alternatively, other analog inputs can be connected for mixing. Here is a table describing possible mixes. [SE] represents single-ended where [DIFF] represents a differential input.
 
 **ADCX1_INPUT_SEL_X:**
-![ADCX1_INPUT_SEL_X](muxmix.png)
+![ADCX1_INPUT_SEL_X](/images/muxmix.png)
 
 
 ### Channel Linking:
 Stereo inputs should be linked and tracked across input channels.
-![](linking.png)
+![](/images/linking.png)
 # TODO: do we want linking for our mono inputs?
 
 ### Clock sources:
@@ -131,7 +131,7 @@ Stereo inputs should be linked and tracked across input channels.
 - *MST_SCK_SRC (0x20):* Sets the source of the SCKO in master mode. *We are using the chip in follower mode, so we are ignoring this register.*
 - *CLKDET_EN (0x20):* **Set the auto clock detector bit to true. This step is important!**
 - PLL configuration: registers 0x28 --> 0x2D
-![](pllregisters.png)
+![](/images/pllregisters.png)
 - *CLK_ERR_STAT (0x75):* Status of halt and error detector. Error detector is high if there is an unexpected ratio of BCK to LRCK. If an error is detected, the chip is put into standby mode.
 - *AUXADC_DATA_CTRL (0x58):* Checks the DC detector as part of the *energysense* and *controlsense*.
 - *SEC_ADC_INPUT_SEL (0x0A):* Scanning for thresholds and interrupts in active mode (autodetects in sleep mode). The chip does not auto switch from sleep to wake mode.
@@ -152,26 +152,26 @@ Our ADC board centers around the PCM1863, but contains other peripherals. This s
 
 Ti recommended practices are:
 
-Here is the current KiCad 3D model for our PCB: ![ADC v.4](pcm1863v4.png)
+Here is the current KiCad 3D model for our PCB: ![ADC v.4](/images/pcm1863v4.png)
 
-Here is the current KiCad schematic for our PCB: ![ADC v.4](pcm1863v4schematic.png)
+Here is the current KiCad schematic for our PCB: ![ADC v.4](/images/pcm1863v4schematic.png)
 
 ## The PCM1863 chip:
-The PCM1863 has 30 pins. ![](pcmpinout.png)
+The PCM1863 has 30 pins. ![](/images/pcmpinout.png)
 
 **Of the 30 pins, 12 are analog and 18 are digital.** The chip is split into a digital and an analog part so the noisy digital powers and signals do not interfere with the sensitive analog signals.
 
-![](digitalanalog.png)
+![](/images/digitalanalog.png)
 
 ---
 
 ### Example layouts:
 Below are several example circuits given in the Ti datasheet:
-![](pcblayoutex.png)
+![](/images/pcblayoutex.png)
 
-![](testcircuit.png)
+![](/images/testcircuit.png)
 
-![](followermodeex.png)
+![](/images/followermodeex.png)
 
 ---
 ### PCM1863 Pins and components:
@@ -274,7 +274,7 @@ The PCM1863 is able to handle 4-channels of analog inputs. There is a right and 
 
 ### Timing requirements for I2C control interface:
 The PCM1863 has two I2C modes: *fast and standard*. If one number is given, the number is the minimum acceptable value. If two values are given, they are given in the form [MIN, MAX] acceptable values. **We will be using standard mode.** Both fast and standard modes follow the same timing constraints as show in the timing diagram:
-![](i2ctiming.png)
+![](/images/i2ctiming.png)
 
 ***STANDARD MODE:***
 
@@ -319,10 +319,10 @@ The PCM1863 has two I2C modes: *fast and standard*. If one number is given, the 
 **Timing information for follower mode:**
 
 *We will be using follower mode.*
-![](timingfollowermode.png)
+![](/images/timingfollowermode.png)
 
 # TODO: can we do 44.1kHz sampling?
-![](plltimings.png)
+![](/images/plltimings.png)
 
 ---
 
@@ -336,7 +336,7 @@ Where:
 - **J:** is the integer part of K
 - **D:** is the fractional part of K to *four digits of precision*
 
-![](pllexamples.png)
+![](/images/pllexamples.png)
 
 ### Clock error procedure:
 When a clock error is detected, the chip goes into standby mode. The steps are as follows:
@@ -345,8 +345,8 @@ When a clock error is detected, the chip goes into standby mode. The steps are a
 - Restart clock detection, PLL, and clock dividers
 - Start output fade in
 
-![](clkerrorlogic.png)
-![](clkerrorlogic2.png)
+![](/images/clkerrorlogic.png)
+![](/images/clkerrorlogic2.png)
 
 Clock error detection can be ignored by disabling *CLKDET_EN*.
 
@@ -354,14 +354,14 @@ Clock error detection can be ignored by disabling *CLKDET_EN*.
 We are always using the chip in active mode, so the secondary ADC is not used in wake functions.
 
 ### DSPs:
-DSP1 and DSP2 are fixed function processors. DSPs can be programmed by targetting their memory address.
+DSP1 and DSP2 are fixed function processors. DSPs can be programmed by targeting their memory address.
 
 ### PCM1863 Suggested landing pattern:
 The Ti suggested landing pattern for the chip and its TSSOP30 package:
-![](soldermaskex.png)
+![](/images/soldermaskex.png)
 
 
-- ![](i2cex.png)
-- ![](3.3vex.png)
+- ![](/images/i2cex.png)
+- ![](/images/3.3vex.png)
 
 ## Peripherals;

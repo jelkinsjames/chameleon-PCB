@@ -1,0 +1,12 @@
+MPLAB PICkit4 debug to IO board.
+
+Right to left (starting with arrow as pin 1)
+1- MCLR (connected to unlabeled pin currently (with 10k resistor)
+2- VDD 
+3- GND
+4- NC
+5- SWCLK
+6- NC
+7- NC
+8- SWDIO
+

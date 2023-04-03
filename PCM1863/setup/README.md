@@ -15,9 +15,9 @@ This section uses information from Eric Klavins's GitHub repositories. His repos
 ### Getting a Linux distro
 In order to interface with the ADC, Le Potato needs an operating system. We are using Linux. A downloadable distribution of Linux that is compatible with Le Potato is provided below. The website with similar Ubuntu 22.04 distributions is linked [here](https://distro.libre.computer/ci/ubuntu/22.04/).
 
-> [ubuntu-22.04.1-preinstalled-desktop-arm64+aml-s905x-cc.img.xz](https://distro.libre.computer/ci/ubuntu/22.04/ubuntu-22.04.1-preinstalled-desktop-arm64%2Baml-s905x-cc.img.xz)
+> [ubuntu-22.04.1-preinstalled-desktop-arm64+aml-s905x-cc.img.xz](https://distro.libre.computer/ci/ubuntu/22.04/ubuntu-22.04.1-preinstalled-server-arm64%2Baml-s905x-cc.img.xz)
 
-In order to get the distribution of Linux on Le Potato, you have to flash it. we are using [Balena Etcher](https://www.balena.io/etcher#download-etcher) to flash our distro. There are two options, "Flash from file" or "Flash from URL." Flashing from a URL will save you time, so we recommend it. Copy the *https://distro.libre.computer/ci/ubuntu/22.04/ubuntu-22.04.1-preinstalled-desktop-arm64%2Baml-s905x-cc.img.xz* URL into the "Use Image URL." Select a target to flash your distro to (your MicroSD). Select "Flash!" and wait for the etcher to finish.
+In order to get the distribution of Linux on Le Potato, you have to flash it. we are using [Balena Etcher](https://www.balena.io/etcher#download-etcher) to flash our distro. There are two options, "Flash from file" or "Flash from URL." Flashing from a URL will save you time, so we recommend it. Copy the *https://distro.libre.computer/ci/ubuntu/22.04/ubuntu-22.04.1-preinstalled-server-arm64%2Baml-s905x-cc.img.xz* URL into the "Use Image URL." Select a target to flash your distro to (your MicroSD). Select "Flash!" and wait for the etcher to finish.
 
 Once completed, eject the MicroSD card. Your MicroSD card now contains a distribution of Linux to run on Le Potato!
 

@@ -1,4 +1,4 @@
-21704982326416956
+21708344642456248
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -53612,6 +53612,13 @@ heatsink
 0
 2
 1
+IC_ADS125H01IRHBT (1)
+IC_ADS125H01IRHBT
+
+
+0
+38
+38
 Inductor_SMD
 L_6.3x6.3_H3
 Choke, SMD, 6.3x6.3mm 3mm height
@@ -87583,6 +87590,13 @@ Integrated Circuit
 0
 48
 48
+custom_lib
+EG_1218
+
+
+0
+3
+3
 custom_lib
 NCP163BMX180TBG
 

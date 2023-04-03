@@ -52,6 +52,38 @@ sudo systemctl set-default multi-user.target
 
 Your Le Potato now has a functional distribution of Linux that it can use to interact with the ADC. If you prefer to SSH into your Le Potato, Eric Klavins has a tutorial section on SSHing linked [here](https://github.com/klavins/potato-recipies/blob/main/big-linux/README.md).
 
+### Installing YASE Le Potato recipes
+The Le Potato does not have the I2C functionality we want preprogrammed. To solve this issue, Eric Klavins wrote a [potato-recipes](https://github.com/klavins/potato-recipies) distro that contains a page on [installing the potato-recipes](https://github.com/klavins/potato-recipies/tree/main/yase). The distro contains YASE and I2C. The `potato-recipes` distro uses several prerequisite softwares, to install them:
+
+```bash
+apt update
+apt install git
+sudo apt install librtmidi-dev nlohmann-json3-dev libfftw3-dev libasound2-dev
+
+```
+
+After installing the prerequisites, we need to clone the GitHub repo:
+
+```bash
+git clone https://github.com/klavins/yase.git
+cd yase/potato
+```
+
+If you want to get YASE running (not needed for I2C communication), you need to change the root directory in the `potato-defs.mk` file to the location of the YASE directory on your computer. You should change the line to match your YASE location:
+
+```bash
+ROOT_DIR    := /home/klavins/yase
+```
+
+To compile and run an example YASE, run from the `potato` directory in the `yase` directory:
+
+```bash
+make
+cd BigSound
+make
+./bin/big_sound
+```
+
 ---
 
 ## Setting up the physical ADC
@@ -70,6 +102,8 @@ I2C communication consists of two parts - data and clock. On the Le Potato, pin 
 Regardless of the channel, the I2C data pin on the Le Potato connects to the `SDA` pin on the ADC. ADC v.4 is mislabeled, and the `MOSI` pin is the `SDA` pin.
 
 The I2C clock pin on the Le Potato connects to the `SCK` pin on the ADC. ADV v.4 is mislabeled, and the `MC` pin is the `SCK` pin.
+
+On the ADC v.4 board, connect the `OSC` pin to the `SCKI` pin. 
 
 ---
 

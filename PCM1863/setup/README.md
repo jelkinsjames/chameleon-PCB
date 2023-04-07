@@ -56,11 +56,13 @@ Your Le Potato now has a functional distribution of Linux that it can use to int
 The Le Potato does not have the I2C functionality we want preprogrammed. To solve this issue, Eric Klavins wrote a [potato-recipes](https://github.com/klavins/potato-recipies) distro that contains a page on [installing the potato-recipes](https://github.com/klavins/potato-recipies/tree/main/yase). The distro contains YASE and I2C. The `potato-recipes` distro uses several prerequisite softwares, to install them:
 
 ```bash
-apt update
-apt install git
+sudo apt update
+sudo apt upgrade
+sudo apt install git
 sudo apt install librtmidi-dev nlohmann-json3-dev libfftw3-dev libasound2-dev
-
 ```
+
+Updating and upgrading apt takes a long time. Expect to wait 15-30 minutes.
 
 After installing the prerequisites, we need to clone the GitHub repo:
 
@@ -69,7 +71,7 @@ git clone https://github.com/klavins/yase.git
 cd yase/potato
 ```
 
-If you want to get YASE running (not needed for I2C communication), you need to change the root directory in the `potato-defs.mk` file to the location of the YASE directory on your computer. You should change the line to match your YASE location:
+If you want to get YASE running (not needed for I2C communication), you need to change the root directory in the `potato_defs.mk` file to the location of the YASE directory on your computer. You should change the line to match your YASE location:
 
 ```bash
 ROOT_DIR    := /home/klavins/yase

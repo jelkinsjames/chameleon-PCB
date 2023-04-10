@@ -1,3 +1,18 @@
+notachevy
+#4575
+
+chameleonLab — Today at 1:45 PM
+# PCM1863 Physical Board
+
+In our project, we are using the PCM1863 as an analog-to-digital (ADC) converter. The goal of the chip is to take analog input, and change the signal into a readable I2S output.
+
+## Components:
+- 0.1uF: X7R, 50V (some are 16V, but we use 50V for all for ease of placement) Ceramic
+Expand
+message.txt
+19 KB
+﻿
+chameleonLab#0277
 # PCM1863 Physical Board
 
 In our project, we are using the PCM1863 as an analog-to-digital (ADC) converter. The goal of the chip is to take analog input, and change the signal into a readable I2S output.
@@ -102,7 +117,7 @@ I2C status: The status of I2C can be read from register 0x72 through 0x75 and 0x
 ![](clocking.png)
 >>>>>>> 1a03b37f42354869c9ae66fb4a058da42aa7bd5b
 
-We will be using the ADC is follower mode. The PLL will automatically detect for standard audio sampling rates. The clocking modes are shown below:
+We will be using the ADC in master mode. The PLL will automatically detect for standard audio sampling rates. The clocking modes are shown below:
 ![](/images/clockingmodes.png)
 
 # TODO: what is our master clock speed? What is our bit clock speed? What is our LLRCK speed? What are DSP1 and DSP2?
@@ -111,6 +126,25 @@ We will be using the ADC is follower mode. The PLL will automatically detect for
 ---
 # Registers:
 The registers are split into two usable pages. Page 0 deals with device configuration and page 1 indirectly program coefficients for two fixed DSPs. Page 0 is the focus of this project. Change pages by writing to register 0x00 with the desired page number. Reset registers by writing 0xFE to register 0x00. Page 235 deals with registers that should not be edited, so we will not discuss them.
+
+- 0x01: channel 1L gain. What do we want?
+- 0x05: clipping and gain. set gain to all be the same: 11100110
+- 0x0b: i2s receive: 00000000. 32 bit word length for single ended and stereo. LRCK 50% duty cycle. I2S format.
+- 0x0d: serial data offset: 00000001. setting offset to be i2s.
+- 0x0e: serial data offset: 00000001. setting offset to be i2s.
+- 0x0f: i have no idea what this means.
+- 0x10: GPIO 0-1 control: 00000101. DOUT2 is GPIO0.
+- 0x12: GPIO 0-1 direction: 00000100. set GPIO0 as output.
+- 0x1a: digital mic. 01010000. set mics to GPIO1 not GPIO0.
+- 0x20: clocks. 01010001. use SCK in master mode.
+- 0x72: read device status. run mode is 00001111 and power down is 00000000
+- 0x73: read current sampling freq: how to lower to 44.1kHz?
+- 0x78: read power status
+
+
+
+
+
 
 ### Input Selection:
 Inputs can be mixed using the ADC input selection register *ADCX1_INPUT_SEL_X (0x06 --> 0x09).* Mixing left and right sources to create mono mixes can only be done in the digital mixer, post ADC conversion, or alternatively, other analog inputs can be connected for mixing. Here is a table describing possible mixes. [SE] represents single-ended where [DIFF] represents a differential input.
@@ -394,3 +428,5 @@ The Ti suggested landing pattern for the chip and its TSSOP30 package:
 =======
 ![](soldermaskex.png)
 >>>>>>> 1a03b37f42354869c9ae66fb4a058da42aa7bd5b
+message.txt
+19 KB

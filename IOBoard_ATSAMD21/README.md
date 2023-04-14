@@ -56,9 +56,9 @@ The biggest design consideration made for the PCB was making it compatible with 
 - Right mounting holes aligned in HP increments from the left holes
 
 For the IO board, I chose a width of 15HP. I found this size to be a good width for fitting all the components we needed. The mounting holes are 13HP apart, as this way there was plenty of clearance from the hole to right edge.
-
-![IOBoard V2](figs/IOBoardPicture.jpg)
-
+<p align = "center">
+  <img src="figs/IOBoardPicture.jpg" width ="250">
+</p>
 I placed the rotary encoders, LEDs, and switches on a grid of 0.1" so that I could make them symmetrical across the middle of the board. I used a smaller grid for the ATSAMD21G18 and bypass capacitors to make routing easier. The ATSAMD21G18 has both internal pull up and pull down resistors, so there was no need to include extra resistors on the board, except for the resistors used for the LEDs. I found 10k ohms to yield a good brightness for the LEDs in testing.
 
 For power, I am using a 3.3v LDO. I chose this instead of stealing power from the main computer in hopes that it may be a little more stable and allow for  expansion in the future.

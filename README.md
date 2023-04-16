@@ -62,7 +62,7 @@ The Chameleon Module sits on top of the ARTY board, which has female pin headers
 ---
 
 ## User Interface (U/I):
-- The UI is managed by an [atmega328p](https://www.microchip.com/en-us/product/ATmega328P) chip (the same chip as an Arduino UNO)
+- The UI is managed by an [ATSAMD21](https://www.microchip.com/en-us/product/ATsamd21g18) microcontroller
 - The UI has four rotary encoders, LEDs, and toggle switches
 - A custom I2C protocol is used to: *query the state of encoders and switches, reset encoders, and set LEDs.*
 

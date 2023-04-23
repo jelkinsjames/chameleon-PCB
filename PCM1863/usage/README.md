@@ -167,3 +167,21 @@ sudo ./read 0x78
 - Register 0x72 should read 00001111: board is powered down (default)
 - Register 0x73 should read 00000100: frequency range is
 - Register 0x78 should read 00000111: DVDD, AVDD, and LDO are functional
+
+
+## Commands for Julian:
+
+The order of the commands is important and correct. After logging into the lab potato, run these commands in order (you can SSH to copy and paste if you want).
+
+```bash
+cd libretech-overlays
+sudo ./overlay.sh add libretech-cc-i2c-ao
+sudo ./overlay.sh add libretech-cc-i2c-b
+cd ~
+cd potato-recipes
+cd i2c
+sudo ./write 0x20 01010001
+sudo ./write 0x0d 00000001
+sudo ./write 0x0e 00000001
+sudo ./write 0x0b 01000100
+```

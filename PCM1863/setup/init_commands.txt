@@ -1,0 +1,28 @@
+sudo init 3
+sudo systemctl set-default multi-user.target
+sudo apt update
+sudo apt upgrade
+apt install git
+sudo apt install librtmidi-dev nlohmann-json3-dev libfftw3-dev libasound2-dev
+sudo apt install  openssh-server
+sudo apt install libi2c-dev
+
+git clone https://github.com/klavins/yase.git
+cd yase/potato
+
+// edit potato-defs.mk file
+
+make
+
+cd ~
+git clone https://github.com/libre-computer-project/libretech-overlays.git
+cd libretech-overlays
+make
+sudo cp -r overlays/*.dtbo /lib/firmware
+sudo ./overlay.sh add libretech-cc-i2c-ao
+sudo ./overlay.sh add libretech-cc-i2c-b
+
+cd yase
+cd potato-recipes
+gcc read.c -li2c -o read
+gcc write.c -li2c -o write

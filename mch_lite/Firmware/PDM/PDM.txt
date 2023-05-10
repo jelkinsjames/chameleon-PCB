@@ -1,0 +1,16 @@
+MCHStreamer PDM Firmware
+
+-Format: PDM + I2S out of PDM
+-Inputs: 16 channels PDM using stereo PDM
+-Outputs: 16 channels of PDM on I2S
+-Bits per Channel: 24@I2S
+-Sampling Frequency: 11025, 12000, 16000, 32000, 220500, 44100, 48000
+
+MCHStreamer PDM + TOSLINK Firmware
+
+-Format: PDM + I2S out of PDM + Stereo TosLink Out
+-Inputs: 16 channels PDM using stereo PDM
+-Outputs: 16 channels of PDM on I2S + Stereo TosLink Out from HOST
+-Bits per Channel: 24@I2S
+-Sampling Frequency: 11025, 12000, 16000, 32000, 220500, 44100, 48000
+-Remarks: Frequency below 44100 not tested with Toslink

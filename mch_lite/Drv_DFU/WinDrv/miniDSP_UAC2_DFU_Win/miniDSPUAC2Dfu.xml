@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- DFU Wizard Configuration File        
+     For documentation see TUSBAudio_UserManual.pdf, section "DFU Wizard Configuration".
+-->
+
+<DFU FormatVersionMajor="4" FormatVersionMinor="0">
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- GUID required to locate the driver DLL.
+    IMORTANT: This GUID must be equal to the one specified in the 
+    'InterfaceGUID=' statement in custom.ini -->
+    <DriverInterfaceGUID>{958B848B-9857-4D5E-B5B8-585D8C1D741E}</DriverInterfaceGUID>
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- Add supported devices below in the <SupportedDevices> section.
+    Example:
+    <SupportedDevices>
+        <Device VID="0x1234" PID="0xABCD">
+            <Firmware MajorVersion="2" MinorVersion="11">FirmwareForPidABCD.bin</Firmware>
+        </Device>  
+        <Device VID="0x1234" PID="0x0815" Revision="0x0200">
+            <Firmware MajorVersion="5" MinorVersion="11" TargetIndex="0">FirmwareForPid0815v2.bin</Firmware>
+        </Device>
+    </SupportedDevices>
+    --> 
+    <SupportedDevices> 
+    </SupportedDevices> 
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ --> 
+    <!-- Supported values: No, Warn, Block -->
+    <CheckFirmwareVersion>No</CheckFirmwareVersion>
+    <DisplayFirmwareFile>True</DisplayFirmwareFile>
+    <AllowToAbortUpgrade>True</AllowToAbortUpgrade>
+    <LanguageSelectionDialog>
+        <Enabled>False</Enabled>    
+    </LanguageSelectionDialog>      
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+</DFU>

@@ -1,0 +1,9 @@
+MCHStreamer ADAT Firmware
+
+-Format: ADAT In & Out over optical + I2S Output of the ADAT IN & out
+-Inputs: 8 channels
+-Outputs: 8 channels
+-Bits per Channel: 24
+-Sampling Frequency: 44100@8ch, 48000@8ch, 88200@4ch, 96000@4ch
+
+Notes: MCHStreamer Lite will not have the ADAT Input working

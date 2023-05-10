@@ -1,0 +1,110 @@
+ChangeLog for MCHStreamer / MCHStreamer Lite
+
+-20220314 v1.09a
+	Fix timing issue with the MCHStreamer I2C
+
+	Updated firmware: All
+
+-20211228 v1.09
+	Add support for MCHStreamer Lite
+	
+	Note: MCHStreamer Lite will not support SPDIF/TOSlink/ADAT Input due to lag of clock synthesizer, 
+		the firmware support those input can still be loaded onto the Lite but without any signal on those input channels
+
+	Updated firmware: All
+
+
+-20210723 v1.08
+	Add support to next XMOS internal flash
+	Reduce the DSD switching frequency delay
+	
+	Updated firmware: All
+
+-20200727 v1.07
+	disable TDM16 output volume control to due to unknow issue on switching to 96Khz
+
+-20190930 v1.06.1
+	Fix multichannels DSD not working
+
+	updated firmware: MCHStreamer_0i8o_sn16_DSD_v1.6.1_up.bin
+
+-20190704 v1.06
+	Change PID to avoid confusion with USBStreamer, require UAC2 driver v4.67.0 or later
+	Add support for 32bits Input for firmware have I2S or TDM input
+	Add DSD / nPCM indicator pin. Logic 1 when DSD/DoP mode and logic 0 when PCM mode
+	Remap the DSD pins for matching DSD/ PCM DAC such as AK4458.
+		 ie. LRCLK will be DSD CH1, DSD CH(x) -> DSD CH(x+1) (eg. DSD CH1 -> DSD CH2), DSD CH8 will become DSD:1/PCM:0 indicator
+
+	updated firmware: All
+	
+
+-20190613 v1.05
+	Add SN on PDM & UDAC8 firmware
+	
+	updated firmware:
+		MCHStreamer_16i0o_sn19_PDM_v1.5_up.bin
+		MCHStreamer_16i0o_sn20_PDM_v1.5_up.bin
+		MCHStreamer_0i8o_sn21_DAC8_v1.5_up.bin
+		MCHStreamer_0i8o_sn22_DAC8_v1.5_up.bin
+
+-20190408 v1.05
+	Add second SN on some firmware
+
+	Update firmware: All
+
+-20190326 v1.04
+	Updated the Input and Output Terminal type inside the USB descriptor
+
+	Update firmware: All
+
+-20190318 v1.03
+	Add Inverted BCLK on TDM Fimware on PDM port clock pin
+	Add feedback endpoint for firmware without external clock (SPDIF/TOSLINK/ADAT)
+
+	Update firmware: All
+
+-20190305 v1.02
+	Add LED -> Purple on DoP/DSD
+	Change the DCB version for 6.30.0 to 1.02 to match our own versioning
+	Change the power consumption from 500mA to 100mA
+	
+	Update firmware: All
+
+-20190301
+	First version of PDM 16ch to USB / I2S
+	Updated PinMap.xlsx PDM status
+
+-20190227
+	Add Serial number in normal and DFU descriptor
+	Add keywords in to the device name descriptor  eg. MCHStreamer ADAT instead of all call MCHStreamer
+	Updated PinMap.xlsx: Marked Power, Input and Output with color
+
+	TODO: PDM
+
+	Updated firmware: All
+
+-20190226
+
+	Fix toslink in firmware selected SPDIF, affect name on the clock selector and In Out pin name in the volume page
+	First version of ADAT, DAC8 & UDIO <AES/SPDIF card>, test new hardware for DAC8 & UDIO
+	Updated PinMap.xlsx 
+		Swap the TosLink SPDIF Input and Output
+		Add channels support number on ADAT under different sampling rate
+
+	TODO: PDM
+
+	Updated firmware:
+		MCHStreamer_10i10o_spdif_v1.0_up.bin
+		MCHStreamer_10i10o_toslink_v1.0_up.bin
+		MCHStreamer_stereo_spdif_Only_v1.0_up.bin
+		MCHStreamer_stereo_toslink_Only_v1.0_up.bin
+		MCHStreamer_8i8o_adat_v1.0_up.bin
+		MCHStreamer_0i8o_DAC8_v1.0_up.bin
+		MCHStreamer_8i8o_UDIO_v1.0_up.bin
+
+
+-20190225
+
+	First version of firmware
+
+	TODO: ADAT, PDM

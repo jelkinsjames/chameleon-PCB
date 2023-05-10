@@ -1,0 +1,13 @@
+MCHStreamer DSD Firmware
+
+-Format: I2S / DSD format
+-Inputs: 2 or 8 channels
+-Outputs: 2 or 8 channels
+-Bits per Channel: 24/32 for I2S, 1 for DSD
+-Sampling Frequency: I2S: 44100, 48000, 88200, 96000, 176400, 192000, 352800, 384000. DSD: 64, 128, 256
+
+-v1.6 or after
+
+	Add DSD / nPCM indicator pin. Logic 1 when DSD/DoP mode and logic 0 when PCM mode
+	Remap the DSD pins for matching DSD/ PCM DAC such as AK4458.
+		 ie. LRCLK will be DSD CH1, DSD CH(x) -> DSD CH(x+1) (eg. DSD CH1 -> DSD CH2), DSD CH8 will become DSD:1/PCM:0 indicator

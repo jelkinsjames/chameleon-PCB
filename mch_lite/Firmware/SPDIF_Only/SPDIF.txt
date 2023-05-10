@@ -1,0 +1,10 @@
+MCHStreamer SPDIF Firmware
+
+-Format: SPDIF
+-Inputs: stereo SPDIF In
+-Outputs: stereo SPDIF & TOSLink & I2S Out (Share same stereo signal)
+-Bits per Channel: Input@24, Output@24
+-Sampling Frequency: 44100, 48000, 88200, 96000, 176400, 192000
+
+
+Notes: MCHStreamer Lite Toslink input will not work

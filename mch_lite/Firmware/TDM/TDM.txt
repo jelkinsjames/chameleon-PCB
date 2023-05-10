@@ -1,0 +1,7 @@
+MCHStreamer TDM Firmware
+
+-Format: TDM8 In & Out (BCLK = 8*32*FS)
+-Inputs: n x 8 TDM In (Total: 8/16/24ch)
+-Outputs: n x 8 TDM Out (Total: 8/16/24ch)
+-Bits per Channel: Input@24/32 Output@24/32
+-Sampling Frequency: 44100, 48000, 88200, 96000

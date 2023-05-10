@@ -1,0 +1,12 @@
+MCHStreamer I2S+SPDIF Firmware
+
+-Format: I2S SPDIF
+-Inputs: 8 I2S channels + stereo SPDIF In
+-Outputs: 8 I2S channels + stereo SPDIF & TOSLink Out
+-I2S Bits per Channel: Input@24/32, Output@24/32
+-SPDIF Bits per Channel: 24
+-Sampling Frequency: 44100, 48000, 88200, 96000, 176400, 192000
+
+
+
+Notes: MCHStreamer Lite Toslink input will not work

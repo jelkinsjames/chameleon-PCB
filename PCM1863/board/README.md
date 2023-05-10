@@ -424,9 +424,31 @@ The Ti suggested landing pattern for the chip and its TSSOP30 package:
 - ![](/images/i2cex.png)
 - ![](/images/3.3vex.png)
 
-## Peripherals;
+## Peripherals:
 =======
 ![](soldermaskex.png)
 >>>>>>> 1a03b37f42354869c9ae66fb4a058da42aa7bd5b
 message.txt
 19 KB
+
+## Inputs:
+Line out from a 3.5mm jack:
+- 1mW to a 600ohm load
+- 0.77Vrms or 2.2Vpp with 1.3mArms or 3.6mApp
+
+Should use an oscilloscope to measure the voltage doming from the jack. Voltage is 2mVbw to 20mVrms. Suggested gain is 20dB. Direct instruments can produce over 2Vrms.
+
+Need a circuit to filter. Can use a capacitive op amp. Can use RC for cutoff. Can pre-amplify with op amp.
+
+Control voltage: [-12V, 12V] for CV, [-3V, 8V] for Midi if C3 = 0V. Voltage needs to be shifted up 2.5V for input control voltages if only desiring positive aspects (for resonance) to [0V, 2.5V].
+
+Include protection diodes to prevent the voltage going over +12V/-12V!
+- CV: Control voltage. Need a GATE signal to activate the CV, any voltage over 3V will work [3V, 12v].
+- VCF: Voltage filter.
+- VCO: Voltage oscillator.
+
+Control voltage:
+- 12 notes for each voltage. Either AC <20Hz or DC. Trigger signals are 3-4ms. Gate signals are 25-35ms. Audio should be in the range of 20Hz-20,000Hz.
+- Input should have an impedance of 100kOhms - should be done through a filter.
+
+Midi uses A-100 system bus. Needs to handle at most +12V/2A, -12V/1.2A, +5V/4A.

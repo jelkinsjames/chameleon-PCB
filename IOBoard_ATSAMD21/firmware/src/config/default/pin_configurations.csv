@@ -1,0 +1,39 @@
+"Pin Number","Pin ID","Custom Name","Function","Mode", "Direction","Latch","Pull Up","Pull Down","Drive Strength"
+1,PA00,LED0,GPIO,Digital,Out,Low,,,NORMAL
+2,PA01,LED1,GPIO,Digital,Out,Low,,,NORMAL
+3,PA02,LED2,GPIO,Digital,Out,Low,,,NORMAL
+4,PA03,LED3,GPIO,Digital,Out,Low,,,NORMAL
+7,PB08,,Available,,,,,,NORMAL
+8,PB09,,Available,,,,,,NORMAL
+9,PA04,SW0,GPIO,Digital,In,n/a,No,Yes,NORMAL
+10,PA05,SW1,GPIO,Digital,In,n/a,No,Yes,NORMAL
+11,PA06,SW2,GPIO,Digital,In,n/a,No,Yes,NORMAL
+12,PA07,SW3,GPIO,Digital,In,n/a,No,Yes,NORMAL
+13,PA08,SDA,SERCOM0_PAD0,Digital,High Impedance,n/a,No,No,NORMAL
+14,PA09,SCL,SERCOM0_PAD1,Digital,High Impedance,n/a,No,No,NORMAL
+15,PA10,,Available,,,,,,NORMAL
+16,PA11,,Available,,,,,,NORMAL
+19,PB10,,Available,,,,,,NORMAL
+20,PB11,,Available,,,,,,NORMAL
+21,PA12,,Available,,,,,,NORMAL
+22,PA13,,Available,,,,,,NORMAL
+23,PA14,ENC3_SW,GPIO,Digital,In,n/a,No,Yes,NORMAL
+24,PA15,ENC3_B,GPIO,Digital,In,n/a,Yes,No,NORMAL
+25,PA16,ENC3_A,GPIO,Digital,In,n/a,Yes,No,NORMAL
+26,PA17,ENC2_SW,GPIO,Digital,In,n/a,No,Yes,NORMAL
+27,PA18,ENC2_B,GPIO,Digital,In,n/a,Yes,No,NORMAL
+28,PA19,ENC2_A,GPIO,Digital,In,n/a,Yes,No,NORMAL
+29,PA20,ENC1_SW,GPIO,Digital,In,n/a,No,Yes,NORMAL
+30,PA21,ENC1_B,GPIO,Digital,In,n/a,Yes,No,NORMAL
+31,PA22,ENC1_A,GPIO,Digital,In,n/a,Yes,No,NORMAL
+32,PA23,ENC0_SW,GPIO,Digital,In,n/a,No,Yes,NORMAL
+33,PA24,ENC0_A,GPIO,Digital,In,n/a,Yes,No,NORMAL
+34,PA25,ENC0_B,GPIO,Digital,In,n/a,Yes,No,NORMAL
+37,PB22,,Available,,,,,,NORMAL
+38,PB23,,Available,,,,,,NORMAL
+39,PA27,,Available,,,,,,NORMAL
+41,PA28,,Available,,,,,,NORMAL
+45,PA30,,Available,,,,,,NORMAL
+46,PA31,,Available,,,,,,NORMAL
+47,PB02,,Available,,,,,,NORMAL
+48,PB03,,Available,,,,,,NORMAL

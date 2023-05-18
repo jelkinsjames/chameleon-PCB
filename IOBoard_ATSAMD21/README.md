@@ -6,7 +6,20 @@ This repository contains the hardware and software components of the I/O board f
 The goal for this portion of the project is to create a peripheral to control [YASE](https://github.com/klavins/YASE). It can interface with any CPU using the I2C bus, and will allow users to modify parameters in YASE. The I/O board has rotary encoders, switches, and LEDs that the user can configure using I2C commands.
 
 ---
+- [Hardware](#Hardware)
 
+  - [Rotary Encoders](#Rotary-Encoders)
+  - [Microcontrollers](#Microcontrollers)
+  - [PCB Design](#PCB-Design)
+  - [Programming/Debugging](#Programming/Debugging)
+
+
+- [Software](#Software)
+  - [Sercom I2C Functionality](#Sercom-I2C-Functionality)
+  - [Talking to the IO Board](#Talking-to-the-IOboard)
+
+
+---
 ## Hardware
 
 #### Rotary Encoders
@@ -87,6 +100,8 @@ To make things much easier for you, here is a list of the PICkit4 pins and where
 8. SWDIO
 
 The recommended header I used on my PCB has this in the same order, except for SWCLK and SWDIO, which are switched. I may change this in the future, but connecting two wires in a slightly different order is not a huge pain.
+
+---
 
 ## Software
 

@@ -1,3 +1,0 @@
-(sym_lib_table
-  (lib (name "schematic_libspice")(type "KiCad")(uri "${KIPRJMOD}/schematic_libspice.kicad_sym")(options "")(descr ""))
-)

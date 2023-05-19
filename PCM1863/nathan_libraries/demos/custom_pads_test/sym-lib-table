@@ -1,3 +1,0 @@
-(sym_lib_table
-  (lib (name "custom_pads_schlib")(type "KiCad")(uri "${KIPRJMOD}/custom_pads_schlib.kicad_sym")(options "")(descr ""))
-)

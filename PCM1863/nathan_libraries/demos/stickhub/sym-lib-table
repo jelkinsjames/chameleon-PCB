@@ -1,3 +1,0 @@
-(sym_lib_table
-  (lib (name "RobotProtos")(type "KiCad")(uri "${KIPRJMOD}/RobotProtos.kicad_sym")(options "")(descr ""))
-)

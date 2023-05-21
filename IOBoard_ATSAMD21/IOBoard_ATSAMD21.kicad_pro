@@ -36,7 +36,7 @@
         "pads": {
           "drill": 0.0,
           "height": 0.95,
-          "width": 0.8
+          "width": 1.05
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -61,7 +61,7 @@
         "version": 2
       },
       "rule_severities": {
-        "annular_width": "error",
+        "annular_width": "ignore",
         "clearance": "error",
         "connection_width": "warning",
         "copper_edge_clearance": "error",
@@ -176,6 +176,8 @@
       ],
       "track_widths": [
         0.0,
+        0.25,
+        0.5,
         1.0
       ],
       "via_dimensions": [

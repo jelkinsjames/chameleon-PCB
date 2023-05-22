@@ -4,6 +4,12 @@
 
   (paper "A3")
 
+  (title_block
+    (title "I/O Board ")
+    (rev "V3")
+    (company "Chameleon Engine 2023")
+  )
+
   (lib_symbols
     (symbol "Amplifier_Operational:LM2904" (pin_names (offset 0.127)) (in_bom yes) (on_board yes)
       (property "Reference" "U" (at 0 5.08 0)

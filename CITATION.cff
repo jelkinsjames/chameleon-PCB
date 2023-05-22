@@ -1,0 +1,21 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Chameleon PCB Design
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Nathan
+    family-names: Ford
+  - given-names: Max
+    family-names: Chastain
+  - given-names: Trina
+    family-names: Kha
+  - given-names: Julian
+    family-names: James
+  - given-names: Todd
+    family-names: Bloom
+url: 'https://github.com/jelkinsjames/chameleon-PCB'

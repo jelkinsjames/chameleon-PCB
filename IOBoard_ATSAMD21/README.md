@@ -16,7 +16,7 @@ The goal for this portion of the project is to create a peripheral to control [Y
 
 - [Software](#Software)
   - [Sercom I2C Functionality](#Sercom-I2C-Functionality)
-  - [Talking to the IO Board](#Talking-to-the-IOboard)
+  - [Talking to the I/O Board](#Talking-to-the-IOboard)
 
 
 ---
@@ -149,7 +149,7 @@ bool I2C_Callback(SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle
 
 For this project, we will always read a value before writing a value. The value we write is determined by the value previously read. Because of this, I fill `txReg` with the correct data based on what we read from the I2C host. For example, if the host wishes to read the value of `ENC0`, it will first write `0x01` to `rxReg`. We next check the value of `rxReg` and enter the correct case statement. As shown above we just fill `txReg` with `ENC0_val`.
 
-Once this host write operation has finished, the host will initiate a read operation. The IOBoard will respond with the contents of `txReg` and then reset the value to 0. My callback function always returns `true`. If you return false instead, the I2C acknowledgement bit will not be set high. This can be useful to tell the host that data is not ready for transmission. For my application there are no cases in which we won't send valid data, so I always return `true`.
+Once this host write operation has finished, the host will initiate a read operation. The I/O Board will respond with the contents of `txReg` and then reset the value to 0. My callback function always returns `true`. If you return false instead, the I2C acknowledgement bit will not be set high. This can be useful to tell the host that data is not ready for transmission. For my application there are no cases in which we won't send valid data, so I always return `true`.
 
 The events you can add to your callback function are as follows:
 - `SERCOM_I2C_SLAVE_TRANSFER_EVENT_RX_READY`

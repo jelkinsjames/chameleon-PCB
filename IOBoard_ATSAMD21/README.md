@@ -16,7 +16,7 @@ The goal for this portion of the project is to create a peripheral to control [Y
 
 - [Software](#Software)
   - [Sercom I2C Functionality](#Sercom-I2C-Functionality)
-  - [Talking to the I/O Board](#Talking-to-the-IOboard)
+  - [Talking to the I/O Board](#Talking-to-the-I/O-Board)
 
 
 ---

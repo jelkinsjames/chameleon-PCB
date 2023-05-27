@@ -160,7 +160,7 @@ The events you can add to your callback function are as follows:
 
 Now that we have a completed callback function, we just need to tell the SERCOM module to use this function by calling `SERCOM0_I2C_CallbackRegister(I2C_Callback, 0)` in our main function.
 
-### Talking to the IOBoard
+### Talking to the I/O Board
 The following is a full list of all values you can set and read from the IOBoard. Sending an I2C read command of the following 'registers' will return the corresponding values.
 - Encoder 0, reset `0x00`, read value `0x01`
 - Encoder 1, reset `0x10`, read value `0x11`
@@ -168,3 +168,4 @@ The following is a full list of all values you can set and read from the IOBoard
 - Encoder 3, reset `0x30`, read value `0x31`
 - All switches, read `0x40`, least significant 4 bits are correspondent to state of each switch in order SW3, SW2, SW1, SW0. For example, the returned value 0x09 would mean that switch 3 and switch 0 are on.
 - All buttons, read `0x50`, same data format as the switches. When read, these values are reset to 0.
+- All LEDs, write `0x8_` where `_` is the hexadecimal representation of the state of all LEDs. For example, to turn on all LEDs, the user should write `0x8f`, since `f` is the hexadecimal representation of `1111`.

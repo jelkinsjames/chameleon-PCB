@@ -11,12 +11,12 @@ The goal for this portion of the project is to create a peripheral to control [Y
   - [Rotary Encoders](#Rotary-Encoders)
   - [Microcontrollers](#Microcontrollers)
   - [PCB Design](#PCB-Design)
-  - [Programming/Debugging](#Programming/Debugging)
+  - [Programming/Debugging](#Programming-and-Debugging)
 
 
 - [Software](#Software)
   - [Sercom I2C Functionality](#Sercom-I2C-Functionality)
-  - [Talking to the I/O Board](#Talking-to-the-I/O-Board)
+  - [Talking to the IO Board](#Talking-to-the-IO-Board)
 
 
 ---
@@ -84,7 +84,7 @@ The entire back copper layer of my PCB is a ground plane. This makes it very eas
 
 The switches are single throw, dual pole. This choice was made largely because they are much cheaper than single throw, single pole switches and readily available. I connected the middle pin to power, and the top pin to the SAM's GPIO.
 
-### Programming/Debugging
+### Programming and Debugging
 
 I use the Microchip PICkit4 to debug/program the SAMD21. I used the recommended debug header provided by KiCad 6. While this seemed to be easy initially, I realized that there was no easily accessible documentation as to what the PICkit4's 8 pins do! Different resources were saying different things, so it required a little guess and check work. To make matters worse, for some silly reason pin 1 of the PICkit4 is the furthest **RIGHT** instead of furthest left like every other convention you might be used to. The only clue I had to this was the arrow pointing at that pin.
 
@@ -160,7 +160,7 @@ The events you can add to your callback function are as follows:
 
 Now that we have a completed callback function, we just need to tell the SERCOM module to use this function by calling `SERCOM0_I2C_CallbackRegister(I2C_Callback, 0)` in our main function.
 
-### Talking to the I/O Board
+### Talking to the IO Board
 The following is a full list of all values you can set and read from the IOBoard. Sending an I2C read command of the following 'registers' will return the corresponding values.
 - Encoder 0, reset `0x00`, read value `0x01`
 - Encoder 1, reset `0x10`, read value `0x11`

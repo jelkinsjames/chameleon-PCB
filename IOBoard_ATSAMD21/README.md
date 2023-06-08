@@ -11,6 +11,7 @@ The goal for this portion of the project is to create a peripheral to control [Y
   - [Rotary Encoders](#Rotary-Encoders)
   - [Microcontrollers](#Microcontrollers)
   - [PCB Design](#PCB-Design)
+  - [Analog Inputs and Outputs](#Analog-Inputs-and-Outputs)
   - [Programming/Debugging](#Programming-and-Debugging)
 
 
@@ -70,19 +71,27 @@ The biggest design consideration made for the PCB was making it compatible with 
 - Left mounting holes aligned 3mm from top and bottom edge, and 7.45mm from the left edge
 - Right mounting holes aligned in HP increments from the left holes
 
-For the IO board, I chose a width of 15HP. I found this size to be a good width for fitting all the components we needed. The mounting holes are 13HP apart, as this way there was plenty of clearance from the hole to right edge.
+For the IO board, I chose a width of 15HP. I found this size to be a good width for fitting all the components we needed. Since the I/O board will be sitting underneath the front panel, I reduced the overall dimension by 16.5mm. This allows the board to fit nicely inside a Eurorack style skiff.
 
 I placed the rotary encoders, LEDs, and switches on a grid of 0.1" so that I could make them symmetrical across the middle of the board. I used a smaller grid for the ATSAMD21G18 and bypass capacitors to make routing easier. The ATSAMD21G18 has both internal pull up and pull down resistors, so there was no need to include extra resistors on the board, except for the resistors used for the LEDs. I found 10k ohms to yield a good brightness for the LEDs in testing.
 
-For power, I am using a 3.3v LDO. I chose this instead of stealing power from the main computer in hopes that it may be a little more stable and allow for  expansion in the future.
+For power, I am using a 3.3v LDO. I chose this instead of stealing power from the main computer in hopes that it may be a little more stable and allow for expansion in the future.
 
 Next to every power pin on the SAMD21, I included two bypass capacitors. I chose 0.1uF and 10uF capacitors as it is typically recommended the larger bypass capacitor are 100x the smaller's capacitance. Ideally, I would have used both a tantalum and a ceramic capacitor for better performance, but as this board is purely digital I am not overly concerned with noise. Ceramic capacitors are not polar, so it is a little easier to assemble the boards using both ceramic.
 
-All capacitors and resistors use the 0603 package for consistancy.
+All capacitors and resistors use the 0603 package for consistency.
 
 The entire back copper layer of my PCB is a ground plane. This makes it very easy to ground anything that I need by placing a via. Once all of my components were connected to the ATSAMD21G18, I made the rest of the front copper layer a +3.3v power plane. This meant I did not have to route any power traces on the board, vastly simplifying the amount of time it took to design the PCB.
 
 The switches are single throw, dual pole. This choice was made largely because they are much cheaper than single throw, single pole switches and readily available. I connected the middle pin to power, and the top pin to the SAM's GPIO.
+
+### Analog Inputs and Outputs
+
+In the final version of this board, I added 6 mono-analog jacks to the bottom half of the board. The left four are inputs, designed to go to the ADC. There are dedicated switches to choose which of the inputs you are using. The leftmost two are for control voltage (CV) and the middle two are for line level (LL). CV typically ranges from 0-10V, while LL ranges from 0-1V. Because of these vastly different voltage ranges, these inputs are buffered using an op-amp to prevent damage to the ADC board. The two rightmost jacks are dedicated to DAC out. These include an op-amp pre-amplification stage for lower signal-to-noise ratio.
+
+The DAC output and ADC input pins are located on the rear of the I/O board, and are designed to be connected to the DAC and ADC peripherals designed by my teammates.
+
+**These inputs will do nothing without an ADC or DAC. They do not interface with the D21.**
 
 ### Programming and Debugging
 
@@ -99,7 +108,7 @@ To make things much easier for you, here is a list of the PICkit4 pins and where
 7. Not connected
 8. SWDIO
 
-The recommended header I used on my PCB has this in the same order, except for SWCLK and SWDIO, which are switched. I may change this in the future, but connecting two wires in a slightly different order is not a huge pain.
+The recommended header I used on my PCB has this in the same order and are labeled clearly, this should be very straight forward. Once plugged into the powered board, MPLAB will automatically recognize that it has a valid device to program. You may need to select the PICkit4 as your debugger in the IDE somewhere if this does not work automatically.
 
 ---
 

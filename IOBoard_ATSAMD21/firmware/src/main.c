@@ -34,8 +34,11 @@
 // *****************************************************************************
 // *****************************************************************************
 uint8_t ENC0_val;
+
 uint8_t ENC1_val;
+
 uint8_t ENC2_val;
+
 uint8_t ENC3_val;
 
 _Bool ENC0_last;
@@ -121,28 +124,25 @@ void ENC_update() {
 }
 
 void LED_update(uint8_t state) {
-    if(state / 8 > 0) {
+    if(state & 0x08) {
         LED3_Set();
     } else {
         LED3_Clear();
     }
-    state = state % 8;
     
-    if(state / 4 > 0) {
+    if(state & 0x04) {
         LED2_Set();
     } else {
         LED2_Clear();
     }
-    state = state % 4;
     
-    if(state / 2 > 0) {
+    if(state & 0x02) {
         LED1_Set();
     } else {
         LED1_Clear();
     }
-    state = state % 2;
     
-    if (state > 0) {
+    if (state & 0x01) {
         LED0_Set();
     } else {
         LED0_Clear();
@@ -165,12 +165,12 @@ void Button_update() {
 }
 
 uint8_t getButtonState() {
-    return (8*ENC3_SW) + (4*ENC2_SW) + (2*ENC1_SW) + ENC0_SW;
+    return 0x00 | ((ENC3_SW << 3) | (ENC2_SW << 2) | (ENC1_SW << 1) | ENC0_SW);
     
 }
 
 uint8_t getSwitchState() {
-    return (8 * SW3_Get()) + (4 * SW2_Get()) + (2 * SW1_Get()) + SW0_Get();
+    return 0x00 | (SW0_Get() << 3) | (SW1_Get() << 2) | (SW2_Get() << 1) | (SW3_Get());
 }
 
 uint8_t rxReg;
@@ -226,6 +226,7 @@ bool I2C_Callback(SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle
                     ENC2_SW = 0;
                     ENC3_SW = 0;
                     break;
+
                 default:
                     break;                        
             }
